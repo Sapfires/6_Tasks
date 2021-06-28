@@ -1,0 +1,10 @@
+strange : doctor : weird : 0 : false
+diary : nun : violet : 1 : false
+cookBook : cooker : recipes : 2 : false
+newspaper : astrologist : JupiterSagittarius : 3 : false
+kiticat : wiskas : felix : 4 : false
+bbb : aaa : ccc : 5 : false
+ccc : bbb : ddd : 6 : false
+ooo : ooo : ooo : 7 : false
+cotae : hahaha : fel_ix : 8 : true
+black : iveta : cat : 9 : false

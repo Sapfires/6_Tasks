@@ -1,0 +1,48 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+==Login==
+ConsoleUI -> LoginService : login(login, password)
+LoginService -> UserRepository : getUserByLoginAndPassword
+UserRepository -> LoginService : User
+LoginService -> SessionCache : getOrCreateSessionForUser
+SessionCache -> LoginService : Session
+LoginService -> ConsoleUI : Session
+
+==GetAll==
+ConsoleUI -> BookService : getAll
+BookService -> SessionCache : validatePermission(getAll)
+BookService -> BookRepository : getAll
+BookRepository -> BookService : Page<Book>
+BookService -> ConsoleUI : Page<Book>
+
+==Search==
+ConsoleUI -> BookService : getBookByFilter
+BookService -> SessionCache : validatePermission(getBookByFilter)
+BookService -> BookRepository : getBookByFilter
+BookRepository -> BookService : Page<Book>
+BookService -> ConsoleUI : Page<Book>
+
+==SuggestBook==
+ConsoleUI -> BookService : suggestBook
+BookService -> SessionCache : validatePermission(suggestBook)
+BookService -> BookRepository : addDraft
+BookRepository -> BookService : Book
+BookService -> sendNotification : Administrator
+BookService -> ConsoleUI : Book
+
+==ApproveBook==
+ConsoleUI -> BookService : approveBook
+BookService -> SessionCache : validatePermission(approveBook)
+BookService -> BookRepository : activateBook
+BookRepository -> BookService : Book
+BookService -> sendNotification : List<User>
+BookService -> ConsoleUI : Book
+
+
+
+
+
+@enduml
