@@ -1,0 +1,38 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber 1
+== getAll ==
+ConsoleUI -> NoteService : getTitles
+NoteService -> NoteRepository : getAll
+NoteRepository -> NoteService : List<Note>
+NoteService -> ConsoleUI : List<String>
+
+autonumber 1
+== search ==
+ConsoleUI -> NoteService : getByFilter(filter)
+NoteService -> NoteRepository : getAll
+NoteRepository -> NoteService : List<Note>
+NoteService -> NoteService : filter
+NoteService -> NoteService : order
+NoteService -> ConsoleUI : List<Note>
+
+autonumber 1
+== addNote ==
+ConsoleUI -> ConsoleUI : validate(Note)
+ConsoleUI -> NoteService : add(Note)
+NoteService -> NoteRepository : add(Note)
+NoteRepository -> NoteService : boolean
+NoteService -> ConsoleUI : boolean
+
+autonumber 1
+== onStart ==
+NoteRepository -> File : readAll
+
+autonumber 1
+== onStop ==
+NoteRepository -> File : writeAll
+
+
+
+@enduml
